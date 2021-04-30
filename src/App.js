@@ -1,9 +1,19 @@
+import React, { useState } from 'react';
 import './App.css';
-import List from './components/List/List'
+import List from './components/List/List';
+import store from './utils/store'
 function App() {
-  return (<div>
-    <List />
-  </div>
+  const [data, setData] = useState(store);
+  return (
+    <div>
+      {
+        data.listIds.map((listId) => {
+          const list = data.lists[listId];
+          return <List list={list} key={listId} />;
+        })
+      };
+
+    </div>
 
   );
 }

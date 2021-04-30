@@ -9,11 +9,11 @@ const useStyle = makeStyles((theme) => ({
     },
 
 }));
-export default function Card() {
+export default function Card({card}) {
     const classes = useStyle();
     return (
         <div>
-            <Paper className={classes.card}>Example paper</Paper>
+            <Paper className={classes.card}>{card.content}</Paper>
         </div>
     );
 }

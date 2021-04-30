@@ -16,26 +16,26 @@ const useStyle = makeStyles((theme) => ({
         background: "#5AAC44",
         color: '#fff',
         "&:hover": {
-            background: fade("#5AAC44",0.75)
+            background: fade("#5AAC44", 0.75)
         }
     },
     confirm: {
         margin: theme.spacing(0, 1, 1, 1)
     }
 }))
-export default function InputCard({setOpen}) {
+export default function InputCard({ setOpen }) {
     const classes = useStyle();
     return (
         <div>
             <div >
                 <Paper className={classes.card}>
-                    <InputBase multiline onBlur={()=>setOpen(false)} fullWidth inputProps={{ className: classes.input }} placeholder="Enter text"></InputBase>
+                    <InputBase multiline onBlur={() => setOpen(false)} fullWidth inputProps={{ className: classes.input }} placeholder="Enter text"></InputBase>
                 </Paper>
             </div>
             <div className={classes.confirm}>
-                <Button className={classes.btnConfirm} onClick={()=>setOpen(false)}>Add card</Button>
+                <Button className={classes.btnConfirm} onClick={() => setOpen(false)}>Add card</Button>
                 <IconButton>
-                    <ClearIcon onClick={()=>setOpen(false)}/>
+                    <ClearIcon onClick={() => setOpen(false)} />
                 </IconButton>
             </div>
         </div>
