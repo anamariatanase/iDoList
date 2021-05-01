@@ -6,6 +6,7 @@ import storeAPI from "../../utils/storeAPI";
 
 const useStyle = makeStyles((theme) => ({
     card: {
+        width:'280px',
         margin: theme.spacing(0, 1, 1, 1),
         paddingBottom: theme.spacing(4),
 
@@ -27,7 +28,7 @@ const useStyle = makeStyles((theme) => ({
 export default function InputCard({ setOpen, listId, type }) {
     const classes = useStyle();
     const { addMoreCard, addMoreList } = useContext(storeAPI);
-    const [title, setTitle] = useState(null);
+    const [title, setTitle] = useState('');
     const handleOnChange = (e) => {
         setTitle(e.target.value)
     };

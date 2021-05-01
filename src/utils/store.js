@@ -33,7 +33,7 @@ const data = {
                     content: 'second thing'
                 },
                 {
-                    id: 'card-4',
+                    id: 'card-6',
                     content: 'third thing'
                 },
             ]
