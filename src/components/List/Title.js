@@ -1,8 +1,9 @@
 import { InputBase, Typography } from '@material-ui/core';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { makeStyles } from "@material-ui/core/styles";
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz"
-import { TheatersOutlined } from '@material-ui/icons';
+import storeAPI from '../../utils/storeAPI';
+
 const useStyle = makeStyles((theme) => ({
     editableTitleContainer: {
         margin: theme.spacing(1),
@@ -16,22 +17,32 @@ const useStyle = makeStyles((theme) => ({
     input: {
         margin:theme.spacing(1),
         '&:focus':{
-            background:"#ddd"
+            background:"#ddd",
+            fontWeight: "bold"
         }
         
     }
 }));
 
-export default function Title({title}) {
+export default function Title({title,listId}) {
     const [open, setOpen] = useState(false);
+    const [newTitle,setNewTitle] = useState(title);
+    const {updateListTitle} = useContext(storeAPI)
     const classes = useStyle();
+    const handleOnChange = (e) =>{
+        setNewTitle(e.target.value);
+    }
+    const handleOnBlur = () => {
+        setOpen(false);
+        updateListTitle(newTitle,listId);
+    }
     return (
         <div>
             {open ?
                 (<div >
-                    <InputBase autoFocus value={title}  inputProps={{
+                    <InputBase onChange={handleOnChange} autoFocus value={newTitle}  inputProps={{
                         className: classes.input,
-                    }} fullWidth onBlur={()=>setOpen(!open)}/>
+                    }} fullWidth onBlur={handleOnBlur}/>
                 </div>
                 ) : (
                     < div className={classes.editableTitleContainer}>

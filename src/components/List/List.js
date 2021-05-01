@@ -6,9 +6,9 @@ import Card from './Card';
 import InputContainer from '../Input/InputContainer';
 const useStyle = makeStyles((theme)=>({
     root:{
-        width:'300px',
+        minWidth:'300px',
         backgroundColor:'#EBECF0',
-        marginLeft:theme.spacing()
+        marginLeft:theme.spacing(1),
 
     },
 }));
@@ -19,11 +19,11 @@ export default function List({list}){
             <Paper className={classes.root}>
                 <CssBaseline/>
                 <Typography>
-                    <Title title={list.title}/>
+                    <Title title={list.title} listId={list.id}/>
                     {list.cards.map((card)=>(
-                        <Card key={card.id} card={card}/>
+                        <Card key={card.id} card={card} />
                     ))}
-                    <InputContainer/>
+                    <InputContainer listId={list.id} type="card"/>
                 </Typography>
             </Paper>
         </div>
