@@ -3,8 +3,9 @@ import Navigation from '../nav/Navigation';
 import Wrapper from '../wrapper';
 
 
-function HomePage() {
+function HomePage({loggedIn,setLoggedIn}) {
     const [backgroundImage, setBackgroundImage,] = useState('grey');
+    setLoggedIn(true)
     return (
         <div style={{
             backgroundImage: backgroundImage,
