@@ -10,6 +10,7 @@ function Navigation({name,setName, loggedIn, setLoggedIn,setBackgroundImage}){
        
         
         <div>
+            
             <TopBar setOpenSideMenu={setOpenSideMenu} loggedIn={loggedIn} setLoggedIn={setLoggedIn} name={name} setName={setName}></TopBar>
             <SideMenu openSideMenu={openSideMenu} setOpenSideMenu={setOpenSideMenu} setNewBackgroundImage={setBackgroundImage}/>
         </div>

@@ -35,12 +35,10 @@ function SideMenu({ openSideMenu, setOpenSideMenu,setNewBackgroundImage }) {
     const [openOptionColor, setOpenOptionColor] = useState(false);
     const [openOptionImage, setOpenOptionImage] = useState(false);
     const [imagess, setImages] = useState([])
+   
     useEffect(() => {
         const listOfImages = images;
-
-        setImages(listOfImages)
-
-
+        setImages(listOfImages);
     })
     return (
         <div >

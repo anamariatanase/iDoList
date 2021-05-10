@@ -8,9 +8,9 @@ import Register from './components/Register/Register';
 import HomePage from './components/Homepage/Homepage';
 
 function App() {
-  //const [backgroundImage, setBackgroundImage] = useState('grey');
   const [name, setName] = useState('');
   const [loggedIn, setLoggedIn] = useState(false)
+  const [backgroundImage, setBackgroundImage,] = useState('grey');
 
   console.log(loggedIn)
   useEffect(() => {
@@ -32,12 +32,13 @@ function App() {
   return (
     <div >
       <BrowserRouter>
-        <Navigation  name={name} setName={setName} loggedIn={loggedIn}
+        <Navigation setBackgroundImage={setBackgroundImage} name={name} setName={setName} loggedIn={loggedIn}
           setLoggedIn={setLoggedIn} ></Navigation>
 
         <Route path='/login' exact component={() => <Login loggedIn={loggedIn} setLoggedIn={setLoggedIn} setName={setName} />} />
         <Route path='/register' exact component={Register} />
-        <Route path='/' exact component={() => <HomePage loggedIn={loggedIn} setLoggedIn={setLoggedIn} name={name}  />} />
+        <Route path='/' exact component={() => <HomePage backgroundImage={backgroundImage} setBackgroundImage={setBackgroundImage} loggedIn={loggedIn}
+          setLoggedIn={setLoggedIn} name={name}  />} />
       </BrowserRouter>
     </div>
 

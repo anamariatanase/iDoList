@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { v4 as uuid } from "uuid";
 import List from '../components/List/List';
@@ -20,6 +20,20 @@ const useStyle = makeStyles((theme) => ({
 function Wrapper() {
   const [data, setData] = useState(store);
   const classes = useStyle();
+   useEffect(() => {
+    (
+      async () => {
+        const response = await fetch('http://localhost:3001/api/user',
+          {
+            headers: { 'Content-Type': 'application/json' },
+            method: 'GET',
+            credentials: 'include',
+          });
+        const content = await response.json();
+        console.log(content.lists)
+      }
+    )();
+  }); 
   const addMoreCard = (content, listId) => {
     const newCardId = uuid();
     const newCard = {
