@@ -5,7 +5,7 @@ const useStyle = makeStyles((theme) => ({
     login:{
         display:'flex',
         alignItems:"center",
-        paddingTop:"40px",
+        paddingTop:"45px",
         paddingBottom:"40px"
     }
     ,formSignin: {
@@ -49,7 +49,7 @@ function Login({setName,setLoggedIn,loggedIn}) {
         <div className={classes.login}>
             <main className={classes.formSignin}>
                 <form onSubmit={submit}>
-                    <h1 className="h3 mb-3 fw-normal">Please sign in</h1>
+                    <h1 style={{color:'#5d5a7a'}} className="h3 mb-3 fw-normal">Login into your account</h1>
 
                     <input type="username" className="form-control" id="floatingInput" placeholder="Username" required style={{
                          marginBottom: '3px',
@@ -61,7 +61,7 @@ function Login({setName,setLoggedIn,loggedIn}) {
                          borderBottomRightRadius: '0',
                          borderBottomLeftRadius: '0',
                     } } onChange={e => setPassword(e.target.value)} />
-                    <button className="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+                    <button className="w-100 btn btn-lg" style={{backgroundColor:'#5d5a7a',color:'#fff'}} type="submit">Sign in</button>
                 </form>
             </main>
         </div>

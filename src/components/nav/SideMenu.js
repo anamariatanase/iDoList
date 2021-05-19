@@ -30,16 +30,34 @@ const useStyle = makeStyles((theme) => ({
     }
 }))
 
-function SideMenu({ openSideMenu, setOpenSideMenu,setNewBackgroundImage }) {
+function SideMenu({ apiContent, openSideMenu, setOpenSideMenu, setNewBackgroundImage }) {
     const classes = useStyle();
     const [openOptionColor, setOpenOptionColor] = useState(false);
     const [openOptionImage, setOpenOptionImage] = useState(false);
     const [imagess, setImages] = useState([])
-   
+
     useEffect(() => {
         const listOfImages = images;
         setImages(listOfImages);
     })
+    const updateBackground = (body) => {
+        const url = 'http://localhost:3001/api/update/' + apiContent._id;
+        fetch(url, {
+            method: 'PATCH',
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'include',
+            body: JSON.stringify(body)
+        });
+    }
+
+    const onUpdateBackground = (background) => {
+        console.log("onUpdateBackground:", background);
+        setNewBackgroundImage(background);
+         updateBackground({
+            app_background: background
+        }) 
+    }
+
     return (
         <div >
             <Drawer open={openSideMenu} anchor='right' onClose={() => setOpenSideMenu(false)} >
@@ -49,49 +67,55 @@ function SideMenu({ openSideMenu, setOpenSideMenu,setNewBackgroundImage }) {
                             backgroundImage: 'url(https://i.pinimg.com/originals/3b/8a/d2/3b8ad2c7b1be2caf24321c852103598a.jpg)',
                             backgroundRepeat: 'no-repeat',
                             backgroundSize: 'cover'
-                        }} onClick={() => {setOpenOptionImage(true)
-                                            setOpenOptionColor(false)}}>
+                        }} onClick={() => {
+                            setOpenOptionImage(true)
+                            setOpenOptionColor(false)
+                        }}>
                         </div>
 
-                    <div className={classes.box} style={{
-                        backgroundImage: 'url(https://i.pinimg.com/originals/bf/79/78/bf79786ab41b5aaa4f7d01c6ada26748.png)',
-                        backgroundRepeat: 'no-repeat',
-                        backgroundSize: 'cover'
-                    }} onClick={() => {
-                        setOpenOptionColor(true);
-                        setOpenOptionImage(false);
-                    }}>
+                        <div className={classes.box} style={{
+                            backgroundImage: 'url(https://i.pinimg.com/originals/bf/79/78/bf79786ab41b5aaa4f7d01c6ada26748.png)',
+                            backgroundRepeat: 'no-repeat',
+                            backgroundSize: 'cover'
+                        }} onClick={() => {
+                            setOpenOptionColor(true);
+                            setOpenOptionImage(false);
+                        }}>
+                        </div>
                     </div>
-                </div>
-                <Divider />
-                {openOptionImage ? (<Grow in={openOptionImage}>
-                    <div className={classes.optionContainer}>
-                        {images.map((image, index) => {
-                            return (
-                                <div key={index} className={classes.box} style={{
-                                    backgroundImage: image
-                                }} onClick={()=>setNewBackgroundImage(image)}>
-                                </div>
-                            )
-                        })}
-
-                    </div>
-                </Grow>) : (
-                    <Grow in={openOptionColor}>
+                    <Divider />
+                    {openOptionImage ? (<Grow in={openOptionImage}>
                         <div className={classes.optionContainer}>
-                            {colors.map((color, index) => {
+                            {images.map((image, index) => {
                                 return (
-                                    <div key={index} className={classes.box} style={{
-                                        backgroundColor: color
-                                    }} onClick={()=>{
-                                        setNewBackgroundImage(color);}}>
+                                    <div
+                                        key={index}
+                                        className={classes.box}
+                                        style={{
+                                            backgroundImage: image
+                                        }}
+                                        onClick={() => onUpdateBackground(image)}
+                                    >
                                     </div>
                                 )
                             })}
 
                         </div>
-                    </Grow>
-                )}
+                    </Grow>) : (
+                        <Grow in={openOptionColor}>
+                            <div className={classes.optionContainer}>
+                                {colors.map((color, index) => {
+                                    return (
+                                        <div key={index} className={classes.box} style={{
+                                            backgroundColor: color
+                                        }} onClick={() => onUpdateBackground(color)}>
+                                        </div>
+                                    )
+                                })}
+
+                            </div>
+                        </Grow>
+                    )}
                 </div>
             </Drawer>
         </div >

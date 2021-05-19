@@ -13,7 +13,7 @@ const useStyle = makeStyles((theme) => ({
 export default function Card({ card, index }) {
     const classes = useStyle();
     return (
-        <Draggable draggableId={card.id} index={index}>
+        <Draggable draggableId={card._id} index={index}>
             {(provided) => (
                 <div ref={provided.innerRef }{... provided.dragHandleProps}{... provided.draggableProps}>
                     <Paper className={classes.card}>{card.content}</Paper>

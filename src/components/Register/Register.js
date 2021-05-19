@@ -49,7 +49,7 @@ function Register() {
         <div className={classes.register}>
             <main className={classes.formRegister}>
                 <form onSubmit={submit}>
-                    <h1 className="h3 mb-3 fw-normal">Register</h1>
+                    <h1 style={{color:'#5d5a7a', textAlign:'center'}}className="h3 mb-3 fw-normal">Register to create a new account</h1>
                     <input type="text" className="form-control" id="floatingInput" placeholder="First Name" required style={{
                         marginBottom: '3px',
                         borderBottomRightRadius: '0',
@@ -76,7 +76,7 @@ function Register() {
                         borderBottomRightRadius: '0',
                         borderBottomLeftRadius: '0',
                     }} onChange={e => setEmail(e.target.value)} />
-                    <button className="w-100 btn btn-lg btn-primary" type="submit">Submit</button>
+                    <button style={{backgroundColor:'#5d5a7a',color:'#fff'}}className="w-100 btn btn-lg btn-primary" type="submit">Submit</button>
                 </form>
             </main>
         </div>

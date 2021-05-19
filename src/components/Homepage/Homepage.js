@@ -1,19 +1,19 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Navigation from '../nav/Navigation';
 import Wrapper from '../wrapper';
 
 
-function HomePage({ apiContent,loggedIn, setLoggedIn,backgroundImage}) {
-   // const [backgroundImage, setBackgroundImage,] = useState('grey');
+function HomePage({ apiContent, setLoggedIn, backgroundImage }) {
+    
     setLoggedIn(true)
+
     return (
-        <div  style={{
+        <div style={{
             backgroundImage: backgroundImage,
             backgroundColor: backgroundImage,
             backgroundRepeat: 'no-repeat',
             backgroundSize: 'cover'
         }}>
-            {/* <Navigation setBackgroundImage={setBackgroundImage} /> */}
             <Wrapper apiContent={apiContent} />
         </div>
 

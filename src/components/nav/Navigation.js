@@ -3,7 +3,7 @@ import TopBar from './TopBar';
 import SideMenu from './SideMenu';
 
 
-function Navigation({name,setName, loggedIn, setLoggedIn,setBackgroundImage}){
+function Navigation({apiContent,name,setName, loggedIn, setLoggedIn,setBackgroundImage}){
     const [openSideMenu,setOpenSideMenu] = useState(false);
 
     return (
@@ -12,7 +12,8 @@ function Navigation({name,setName, loggedIn, setLoggedIn,setBackgroundImage}){
         <div>
             
             <TopBar setOpenSideMenu={setOpenSideMenu} loggedIn={loggedIn} setLoggedIn={setLoggedIn} name={name} setName={setName}></TopBar>
-            <SideMenu openSideMenu={openSideMenu} setOpenSideMenu={setOpenSideMenu} setNewBackgroundImage={setBackgroundImage}/>
+            <SideMenu apiContent={apiContent}openSideMenu={openSideMenu} 
+            setOpenSideMenu={setOpenSideMenu} setNewBackgroundImage={setBackgroundImage}/>
         </div>
     )
 }
