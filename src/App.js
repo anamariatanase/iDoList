@@ -8,27 +8,23 @@ import Register from './components/Register/Register';
 import HomePage from './components/Homepage/Homepage';
 
 function App() {
+  const [apiContent, setApiContent] = useState('');
   const [name, setName] = useState('');
+
   const [loggedIn, setLoggedIn] = useState(false)
   const [backgroundImage, setBackgroundImage,] = useState('grey');
 
-  console.log(loggedIn)
-  useEffect(() => {
-    (
-      async () => {
-        const response = await fetch('http://localhost:3001/api/user',
-          {
-            headers: { 'Content-Type': 'application/json' },
-            method: 'GET',
-            credentials: 'include',
-          });
-        const content = await response.json();
-        console.log(content)
-        setName(content.lastName);
-      }
-    )();
-  });
-
+  useEffect(
+    async () => {
+       await fetch('http://localhost:3001/api/user',
+        {
+          headers: { 'Content-Type': 'application/json' },
+          method: 'GET',
+          credentials: 'include',
+        }).then((response)=> response.json()).then((data)=>{
+          setApiContent(data)});
+    }, []);
+    
   return (
     <div >
       <BrowserRouter>
@@ -37,7 +33,7 @@ function App() {
 
         <Route path='/login' exact component={() => <Login loggedIn={loggedIn} setLoggedIn={setLoggedIn} setName={setName} />} />
         <Route path='/register' exact component={Register} />
-        <Route path='/' exact component={() => <HomePage backgroundImage={backgroundImage} setBackgroundImage={setBackgroundImage} loggedIn={loggedIn}
+        <Route path='/' exact component={() => <HomePage apiContent={apiContent} backgroundImage={backgroundImage} setBackgroundImage={setBackgroundImage} loggedIn={loggedIn}
           setLoggedIn={setLoggedIn} name={name}  />} />
       </BrowserRouter>
     </div>
@@ -46,3 +42,17 @@ function App() {
 }
 
 export default App;
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 const useStyle = makeStyles((theme) => ({
     AppBar: {
-        background: 'blue'
+        background: 'purple'
     },
     title: {
         flexGrow: 1,
@@ -24,8 +24,6 @@ const useStyle = makeStyles((theme) => ({
 function TopBar({ setOpenSideMenu, name, setName, setRedirect, message, setMessage,setLoggedIn,loggedIn }) {
     const classes = useStyle();
     let menu;
-    console.log(name)
-    console.log(loggedIn)
 
     const logout = async () => {
 

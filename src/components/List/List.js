@@ -33,7 +33,7 @@ export default function List({ list,index }) {
                                 {provided.placeholder}
                             </div>)}
                         </Droppable>
-                        <InputContainer listId={list.id} type="card" />
+                        <InputContainer listId={list._id} type="card" />
                     </Typography>
                 </Paper>
             </div>

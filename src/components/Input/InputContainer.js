@@ -16,7 +16,7 @@ const useStyle = makeStyles((theme) => ({
         },
     }
 }));
-export default function InputContainer({ listId,type }) {
+export default function InputContainer({ listId, type }) {
     const classes = useStyle();
     const [open, setOpen] = useState(false);
     return (

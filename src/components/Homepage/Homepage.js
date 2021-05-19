@@ -3,7 +3,7 @@ import Navigation from '../nav/Navigation';
 import Wrapper from '../wrapper';
 
 
-function HomePage({ loggedIn, setLoggedIn,backgroundImage}) {
+function HomePage({ apiContent,loggedIn, setLoggedIn,backgroundImage}) {
    // const [backgroundImage, setBackgroundImage,] = useState('grey');
     setLoggedIn(true)
     return (
@@ -14,7 +14,7 @@ function HomePage({ loggedIn, setLoggedIn,backgroundImage}) {
             backgroundSize: 'cover'
         }}>
             {/* <Navigation setBackgroundImage={setBackgroundImage} /> */}
-            <Wrapper />
+            <Wrapper apiContent={apiContent} />
         </div>
 
 
