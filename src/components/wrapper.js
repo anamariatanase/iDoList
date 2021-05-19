@@ -18,37 +18,24 @@ const useStyle = makeStyles((theme) => ({
 }));
 
 function Wrapper({ apiContent }) {
-  const updateCards = async (updatedBody) => {
-    const id = apiContent._id
-    await fetch('http://localhost:3001/api/update/'+ id, {
-      method: "PATCH",
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(
-        updatedBody
-      )
-    })
-
-  }
 
   const [data, setData] = useState(store);
   const classes = useStyle();
-  const counterCard = 0;
-  const counterList = 0;
 
   const updateUserListsOnAPI = (body) => {
     const url = 'http://localhost:3001/api/update/' + apiContent._id;
     console.log(body);
     fetch(url, {
-        method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
-        credentials: 'include',
-        body: JSON.stringify(body)
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'include',
+      body: JSON.stringify(body)
     });
   }
 
   const addMoreCard = (content, listId) => {
     const newCard = createNewCard(content);
-    const updatedList = updateListAndReturn(listId, newCard);
+    const updatedList = updateListCardAndReturn(listId, newCard);
     const lists = apiContent.lists.map(list => list._id === listId ? updatedList : list);
     updateUserListsOnAPI({
       lists: lists
@@ -70,43 +57,80 @@ function Wrapper({ apiContent }) {
     };
   }
 
-  const updateListAndReturn = (listId, newCard) => {
-    const updatedList = apiContent.lists.find(list => list._id === listId);
-    updatedList.cards = [...updatedList.cards, newCard];
-    return updatedList;
-  }
 
-  const addMoreList = (title) => {
+  const createNewList = (title) => {
     const newListId = uuid();
-    const newList = {
+    return {
       id: newListId,
       title,
       cards: []
-    };
-    const newState = {
-      listNames: [...apiContent.listNames, newListId],
-      lists: {
-        ...apiContent.lists,
-        [newListId]: newList
-      }
     }
-    setData(newState);
-  };
-  const updateListTitle = (title, listId) => {
+  }
 
-    const list = apiContent.lists;
-    console.log(list)
-    list.title = title;
+  const updateListCardAndReturn = (listId, newCard) => {
+    const updatedListCard = apiContent.lists.find(list => list._id === listId);
+    updatedListCard.cards = [...updatedListCard.cards, newCard];
+    return updatedListCard;
+  }
+
+
+  const updateListAndReturn = (newList) => {
+    const updatedList = [...apiContent.lists, newList]
+    return updatedList;
+  }
+
+
+  const addMoreList = (title) => {
+    const newList = createNewList(title);
+    const lists = updateListAndReturn(newList);
+
+    updateUserListsOnAPI({
+      lists: lists
+    });
 
     const newState = {
       ...apiContent,
-      lists: {
-        ...apiContent.lists,
-        [listId]: list
-      }
-    }
+      lists: lists
+    };
     setData(newState);
-  };
+  }
+  const updateListTitle = (title, listId) => {
+    const updatedList = updatedTitleAndReturn(title, listId);
+    const lists = apiContent.lists.map(list => list._id === listId ? updatedList : list);
+    updateUserListsOnAPI({
+      lists: lists
+    });
+    const newState = {
+      ...apiContent,
+      lists: lists
+    };
+
+    setData(newState)
+  }
+  const updatedTitleAndReturn = (newTitle,listId) => {
+    const updatedList = apiContent.lists.find(list => list._id === listId);
+
+    updatedList.title = newTitle;
+    return updatedList;
+  }
+  /*  const updateListTitle = (title,listId) => {
+ 
+     const list = apiContent.lists;
+     console.log(list)
+     list.title = title;
+ 
+     const newState = {
+       ...apiContent,
+       lists: {
+         ...apiContent.lists,
+         [listId]: list
+       }
+     }
+     setData(newState);
+   }; */
+
+
+
   const onDragEnd = (result) => {
     const { destination, source, draggableId, type } = result;
 

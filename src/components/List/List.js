@@ -24,7 +24,7 @@ export default function List({ list,index }) {
                 <Paper className={classes.root} {...provided.dragHandleProps}>
                     <CssBaseline />
                     <Typography>
-                        <Title title={list.title} listId={list.id} />
+                        <Title title={list.title} listId={list._id} />
                         <Droppable droppableId={list.id}>
                             {(provided) => (<div ref={provided.innerRef}{...provided.droppableProps} className={classes.cardContainer}>
                                 {list.cards.map((card, index) => (
