@@ -37,7 +37,7 @@ function App() {
 
   useEffect(() => {
     setBackgroundImage(apiContent.app_background);
-     setIsLoading(false);
+    setTimeout(() => setIsLoading(false), 1000);
   }, [apiContent])
  
   const classes = useStyle();
@@ -55,10 +55,9 @@ function App() {
           setLoggedIn={setLoggedIn} name={name}  />} />
       </BrowserRouter>
       )}
-      <div className={classes.spinnerDiv}> 
-      {isLoading && <CircularProgress size={100} className={classes.spinner} />}
-
-      </div>
+      {isLoading &&<div className={classes.spinnerDiv}> 
+        {<CircularProgress size={100} className={classes.spinner} />}
+      </div>}
     </div>
 
   )
